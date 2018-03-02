@@ -1,0 +1,7 @@
+.gradle
+.idea
+META-INF
+build
+out
+gradle
+*.jar
