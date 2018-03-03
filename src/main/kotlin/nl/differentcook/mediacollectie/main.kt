@@ -16,43 +16,58 @@ fun main(args: Array<String>) {
 
     transaction {
         logger.addLogger(StdOutSqlLogger)
-        printStreep();
-        Schijven.select { Schijven.id greater 0 }.forEach {
-            println(it[Schijven.naam] + "," + it[Schijven.capaciteit] + "," + it[Schijven.beschikbaar]
-                    + "," + it[Schijven.scandatum].toLocalDate()
-                    + "," + it[Schijven.created_at].toLocalDate()
-                    + "," + it[Schijven.updated_at].toLocalDate()
-            )
-        }
-        printStreep();
-        Mappen.select { Mappen.id greater 0 }.forEach {
-            println(it[Mappen.naam] + ","
-                    + "," + it[Mappen.created_at].toLocalDate()
-                    + "," + it[Mappen.updated_at].toLocalDate()
-            )
-        }
-        printStreep();
-        bestandstypes.select { bestandstypes.id greater 0 }.forEach {
-            println(it[bestandstypes.naam] + ","
-                    + "," + it[bestandstypes.created_at].toLocalDate()
-                    + "," + it[bestandstypes.updated_at].toLocalDate()
-            )
-        }
-        printStreep();
-        Bestanden.select { Bestanden.id greater 0 }.forEach {
-            println(it[Bestanden.naam] + "," + it[Bestanden.bestandstype] + "," + it[Bestanden.map]
-                    + "," + it[Bestanden.schijf]
-                    + "," + it[Bestanden.grootte]
-                    + "," + it[Bestanden.created_at].toLocalDate()
-                    + "," + it[Bestanden.updated_at].toLocalDate()
-            )
-        }
-        printStreep();
+        printSchijven()
+        printMappen()
+        printBestandstypes()
+        printBestanden()
     }
 }
 
-private fun printStreep() {
-    println("=".streep())
+private fun printBestandstypes() {
+    printStreep();
+    bestandstypes.select { bestandstypes.id greater 0 }.forEach {
+        println(it[bestandstypes.naam] + ","
+                + "," + it[bestandstypes.created_at].toLocalDate()
+                + "," + it[bestandstypes.updated_at].toLocalDate()
+        )
+    }
+    printStreep();
+}
+
+private fun printMappen() {
+    printStreep();
+    Mappen.select { Mappen.id greater 0 }.forEach {
+        println(it[Mappen.naam] + ","
+                + "," + it[Mappen.created_at].toLocalDate()
+                + "," + it[Mappen.updated_at].toLocalDate()
+        )
+    }
+    printStreep();
+}
+
+private fun printSchijven() {
+    printStreep();
+    Schijven.select { Schijven.id greater 0 }.forEach {
+        println(it[Schijven.naam] + "," + it[Schijven.capaciteit] + "," + it[Schijven.beschikbaar]
+                + "," + it[Schijven.scandatum].toLocalDate()
+                + "," + it[Schijven.created_at].toLocalDate()
+                + "," + it[Schijven.updated_at].toLocalDate()
+        )
+    }
+    printStreep();
+}
+
+private fun printBestanden() {
+    printStreep();
+    Bestanden.select { Bestanden.id greater 0 }.forEach {
+        println(it[Bestanden.naam] + "," + it[Bestanden.bestandstype] + "," + it[Bestanden.map]
+                + "," + it[Bestanden.schijf]
+                + "," + it[Bestanden.grootte]
+                + "," + it[Bestanden.created_at].toLocalDate()
+                + "," + it[Bestanden.updated_at].toLocalDate()
+        )
+    }
+    printStreep();
 }
 
 object Schijven : Table(name = "schijven") {
@@ -88,6 +103,10 @@ object Bestanden : Table(name = "bestanden") {
     val grootte: Column<Int> = integer("grootte")
     val created_at: Column<DateTime> = date("created_at")
     val updated_at: Column<DateTime> = date("updated_at")
+}
+
+private fun printStreep() {
+    println("=".streep())
 }
 
 fun String.streep() = repeat(80)
