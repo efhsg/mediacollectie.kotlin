@@ -1,22 +1,26 @@
 package nl.differentcook.mediacollectie
 
 import org.jetbrains.exposed.dao.IntIdTable
+import org.jetbrains.exposed.sql.Column
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.StdOutSqlLogger
-import org.jetbrains.exposed.sql.selectAll
+import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.transactions.transaction
 
 fun main(args: Array<String>) {
 
-    Database.connect("jdbc:mysql://192.168.10.10:3306/mediacollectie", driver = "com.mysql.jdbc.Driver", user = "homestead", password = "secret")
+    Database.connect("jdbc:mysql://192.168.10.10:3306/mediacollectie?autoReconnect=true&useSSL=false", driver = "com.mysql.jdbc.Driver", user = "homestead", password = "secret")
 
     transaction {
         logger.addLogger(StdOutSqlLogger)
-        println("Schijven: ${Schijven.selectAll()}")
+        Schijven.select { Schijven.capaciteit greater 0 }.forEach {
+            println(it[Schijven.naam] + "," + it[Schijven.capaciteit] + "," + it[Schijven.beschikbaar])
+        }
     }
 }
 
-object Schijven : IntIdTable() {
-    val naam = varchar("naam", 50)
-    val capaciteit = varchar("capaciteit", 50)
+object Schijven : IntIdTable(name = "schijven") {
+    val naam: Column<String> = varchar("naam", 50)
+    val capaciteit: Column<Int> = integer("capaciteit")
+    val beschikbaar: Column<Int> = integer("beschikbaar")
 }
