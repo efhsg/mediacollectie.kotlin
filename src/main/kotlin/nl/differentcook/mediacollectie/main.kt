@@ -6,7 +6,7 @@ import org.jetbrains.exposed.sql.transactions.transaction
 
 fun main(args: Array<String>) {
 
-    val dotenv = dotenv() {
+    val dotenv = dotenv {
         directory = "E:\\dev\\projects\\kotlin\\mediacollectie"
     }
 
