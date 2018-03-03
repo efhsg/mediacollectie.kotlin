@@ -6,9 +6,11 @@ import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
 
 fun main(args: Array<String>) {
-
     getDatabase()
+    printData()
+}
 
+private fun printData() {
     transaction {
         logger.addLogger(StdOutSqlLogger)
         printSchijven()

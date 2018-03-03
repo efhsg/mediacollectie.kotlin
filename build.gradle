@@ -25,7 +25,6 @@ repositories {
 }
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     compile 'org.jetbrains.exposed:exposed:0.10.1'
     compile 'io.github.cdimascio:java-dotenv:3.0.0'
     compile "org.slf4j:slf4j-simple:1.7.25";
