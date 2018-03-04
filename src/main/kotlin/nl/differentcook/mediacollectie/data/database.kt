@@ -1,10 +1,8 @@
 package nl.differentcook.mediacollectie.data
 
 import io.github.cdimascio.dotenv.dotenv
-import org.jetbrains.exposed.sql.Column
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.Table
-import org.joda.time.DateTime
 
 fun getDatabase() {
     val dotenv = dotenv {
@@ -16,46 +14,46 @@ fun getDatabase() {
 }
 
 object Schijven : Table(name = "schijven") {
-    val id: Column<Int> = integer("id").primaryKey()
-    val naam: Column<String> = varchar("naam", 25)
-    val capaciteit: Column<Int> = integer("capaciteit")
-    val beschikbaar: Column<Int> = integer("beschikbaar")
-    val scandatum: Column<DateTime> = date("scandatum")
-    val created_at: Column<DateTime> = date("created_at")
-    val updated_at: Column<DateTime> = date("updated_at")
+    val id = integer("id").primaryKey()
+    val naam = varchar("naam", 25)
+    val capaciteit = integer("capaciteit")
+    val beschikbaar = integer("beschikbaar")
+    val scandatum = date("scandatum")
+    val created_at = date("created_at")
+    val updated_at = date("updated_at")
 }
 
 object Mappen : Table(name = "mappen") {
-    val id: Column<Int> = integer("id").primaryKey()
-    val naam: Column<String> = varchar("naam", 200)
-    val created_at: Column<DateTime> = date("created_at")
-    val updated_at: Column<DateTime> = date("updated_at")
+    val id = integer("id").primaryKey()
+    val naam = varchar("naam", 200)
+    val created_at = date("created_at")
+    val updated_at = date("updated_at")
 }
 
 object Bestanden : Table(name = "bestanden") {
-    val id: Column<Int> = integer("id").primaryKey()
-    val naam: Column<String> = varchar("naam", 150)
-    val bestandstype: Column<String> = varchar("bestandstype", 25)
-    val map: Column<Int> = (integer("map") references Mappen.id)
-    val schijf: Column<String> = varchar("schijf", 25)
-    val grootte: Column<Int> = integer("grootte")
-    val created_at: Column<DateTime> = date("created_at")
-    val updated_at: Column<DateTime> = date("updated_at")
+    val id = integer("id").primaryKey()
+    val naam = varchar("naam", 150)
+    val bestandstype = varchar("bestandstype", 25)
+    val map = (integer("map") references Mappen.id)
+    val schijf = varchar("schijf", 25)
+    val grootte = integer("grootte")
+    val created_at = date("created_at")
+    val updated_at = date("updated_at")
 }
 
 object bestandstypes : Table(name = "bestandstypes") {
-    val id: Column<Int> = integer("id").primaryKey()
-    val naam: Column<String> = varchar("naam", 25)
-    val created_at: Column<DateTime> = date("created_at")
-    val updated_at: Column<DateTime> = date("updated_at")
+    val id = integer("id").primaryKey()
+    val naam = varchar("naam", 25)
+    val created_at = date("created_at")
+    val updated_at = date("updated_at")
 }
 
 object Ondertitels : Table(name = "ondertitels") {
-    val id: Column<Int> = integer("id").primaryKey()
-    val bestand: Column<Int> = integer("bestand")
-    val taal: Column<String> = varchar("taal", 25)
-    val soort: Column<String> = varchar("soort", 25)
-    val created_at: Column<DateTime> = date("created_at")
-    val updated_at: Column<DateTime> = date("updated_at")
+    val id = integer("id").primaryKey()
+    val bestand = integer("bestand")
+    val taal = varchar("taal", 25)
+    val soort = varchar("soort", 25)
+    val created_at = date("created_at")
+    val updated_at = date("updated_at")
 }
 
