@@ -8,7 +8,7 @@ import org.joda.time.DateTime
 
 fun getDatabase() {
     val dotenv = dotenv {
-        directory = "E:\\dev\\projects\\kotlin\\mediacollectie"
+        directory = "."
     }
 
     Database.connect(dotenv["DB_URL"] ?: "", driver = dotenv["DB_DRIVER"] ?: "",
@@ -32,20 +32,20 @@ object Mappen : Table(name = "mappen") {
     val updated_at: Column<DateTime> = date("updated_at")
 }
 
-object bestandstypes : Table(name = "bestandstypes") {
-    val id: Column<Int> = integer("id").primaryKey()
-    val naam: Column<String> = varchar("naam", 25)
-    val created_at: Column<DateTime> = date("created_at")
-    val updated_at: Column<DateTime> = date("updated_at")
-}
-
 object Bestanden : Table(name = "bestanden") {
     val id: Column<Int> = integer("id").primaryKey()
     val naam: Column<String> = varchar("naam", 150)
     val bestandstype: Column<String> = varchar("bestandstype", 25)
-    val map: Column<Int> = integer("map")
+    val map: Column<Int> = (integer("map") references Mappen.id)
     val schijf: Column<String> = varchar("schijf", 25)
     val grootte: Column<Int> = integer("grootte")
+    val created_at: Column<DateTime> = date("created_at")
+    val updated_at: Column<DateTime> = date("updated_at")
+}
+
+object bestandstypes : Table(name = "bestandstypes") {
+    val id: Column<Int> = integer("id").primaryKey()
+    val naam: Column<String> = varchar("naam", 25)
     val created_at: Column<DateTime> = date("created_at")
     val updated_at: Column<DateTime> = date("updated_at")
 }
