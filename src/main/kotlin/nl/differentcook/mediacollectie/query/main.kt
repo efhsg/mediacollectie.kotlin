@@ -1,6 +1,7 @@
 package nl.differentcook.mediacollectie.query
 
 import nl.differentcook.mediacollectie.data.Bestanden
+import nl.differentcook.mediacollectie.data.Bestandstypes
 import nl.differentcook.mediacollectie.data.Mappen
 import nl.differentcook.mediacollectie.data.getDatabase
 import org.jetbrains.exposed.sql.Query
@@ -31,7 +32,7 @@ private fun queryBestanden(zoekNaam: String?): Query {
 
 private fun printBestanden(query: Query) {
     query.forEach {
-        println("${it[Bestanden.schijf]}:${it[Mappen.naam]}\\${it[Bestanden.naam]}"
+        println("${it[Bestanden.schijf]}:${it[Mappen.naam]}\\${it[Bestanden.naam]}.${it[Bestanden.bestandstype]}"
         )
     }
 }
