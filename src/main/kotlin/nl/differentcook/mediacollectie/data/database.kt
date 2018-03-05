@@ -15,7 +15,7 @@ fun getDatabase() {
 
 object Schijven : Table(name = "schijven") {
     val id = integer("id").primaryKey()
-    val naam = varchar("naam", 25)
+    val naam = varchar("naam", 25).uniqueIndex()
     val capaciteit = integer("capaciteit")
     val beschikbaar = integer("beschikbaar")
     val scandatum = date("scandatum")
@@ -33,24 +33,24 @@ object Mappen : Table(name = "mappen") {
 object Bestanden : Table(name = "bestanden") {
     val id = integer("id").primaryKey()
     val naam = varchar("naam", 150)
-    val bestandstype = varchar("bestandstype", 25)
-    val map = (integer("map") references Mappen.id)
-    val schijf = varchar("schijf", 25)
+    val bestandstype = varchar("bestandstype", 25) references Bestandstypes.naam
+    val map = integer("map") references Mappen.id
+    val schijf = varchar("schijf", 25) references Schijven.naam
     val grootte = integer("grootte")
     val created_at = date("created_at")
     val updated_at = date("updated_at")
 }
 
-object bestandstypes : Table(name = "bestandstypes") {
+object Bestandstypes : Table(name = "bestandstypes") {
     val id = integer("id").primaryKey()
-    val naam = varchar("naam", 25)
+    val naam = varchar("naam", 25).uniqueIndex()
     val created_at = date("created_at")
     val updated_at = date("updated_at")
 }
 
 object Ondertitels : Table(name = "ondertitels") {
     val id = integer("id").primaryKey()
-    val bestand = integer("bestand")
+    val bestand = integer("bestand") references Bestanden.id
     val taal = varchar("taal", 25)
     val soort = varchar("soort", 25)
     val created_at = date("created_at")
