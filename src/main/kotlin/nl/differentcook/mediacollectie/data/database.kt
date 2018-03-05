@@ -1,8 +1,7 @@
 package nl.differentcook.mediacollectie.data
 
 import io.github.cdimascio.dotenv.dotenv
-import org.jetbrains.exposed.sql.Database
-import org.jetbrains.exposed.sql.Table
+import org.jetbrains.exposed.sql.*
 
 fun getDatabase() {
     val dotenv = dotenv {
@@ -57,3 +56,9 @@ object Ondertitels : Table(name = "ondertitels") {
     val updated_at = date("updated_at")
 }
 
+fun queryBestanden(zoekNaam: String?): Query {
+    val join = Bestanden innerJoin Mappen
+    return if (zoekNaam != null)
+        (join).select { Bestanden.naam like "%" + zoekNaam + "%" } else
+        (join).selectAll()
+}
