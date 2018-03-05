@@ -6,12 +6,12 @@ import nl.differentcook.mediacollectie.data.queryBestanden
 
 fun main(args: Array<String>) {
     printStreep()
-    printBestanden(args)
+    printBestanden(if (args.size == 1) args[0] else null)
     printStreep()
 }
 
-private fun printBestanden(args: Array<String>) {
-    queryBestanden(if (args.size == 1) args[0] else null,
+private fun printBestanden(zoekTerm: String?) {
+    queryBestanden(zoekTerm,
             {
                 println("${it[Bestanden.schijf]}:${it[Mappen.naam]}\\${it[Bestanden.naam]}.${it[Bestanden.bestandstype]}")
             }
