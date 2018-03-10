@@ -9,9 +9,6 @@ fun main(args: Array<String>) {
 }
 
 private fun printBestanden(zoekTerm: String?) {
-    destroyDatabase()
-    makeDatabase()
-    seedDatabase()
     queryBestanden(zoekTerm,
             {
                 println("${it[Bestanden.schijf]}:${it[Mappen.naam]}\\${it[Bestanden.naam]}.${it[Bestanden.bestandstype]}")
