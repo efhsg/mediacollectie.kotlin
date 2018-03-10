@@ -26,6 +26,7 @@ class QueryTests {
                     assert(it[Bestanden.bestandstype].equals("avi"))
                 }
         )
+        assert(found.size == 1)
         assert(found.contains(1877))
     }
 
