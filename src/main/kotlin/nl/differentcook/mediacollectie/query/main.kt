@@ -1,8 +1,6 @@
 package nl.differentcook.mediacollectie.query
 
-import nl.differentcook.mediacollectie.data.Bestanden
-import nl.differentcook.mediacollectie.data.Mappen
-import nl.differentcook.mediacollectie.data.queryBestanden
+import nl.differentcook.mediacollectie.data.*
 
 fun main(args: Array<String>) {
     printStreep()
@@ -11,6 +9,9 @@ fun main(args: Array<String>) {
 }
 
 private fun printBestanden(zoekTerm: String?) {
+    destroyDatabase()
+    makeDatabase()
+    seedDatabase()
     queryBestanden(zoekTerm,
             {
                 println("${it[Bestanden.schijf]}:${it[Mappen.naam]}\\${it[Bestanden.naam]}.${it[Bestanden.bestandstype]}")

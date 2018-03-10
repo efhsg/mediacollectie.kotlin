@@ -10,7 +10,7 @@ buildscript {
 }
 
 group 'nl.differentcook'
-version '1.0-SNAPSHOT'
+version '1.0'
 
 apply plugin: 'java'
 apply plugin: 'kotlin'
@@ -20,7 +20,7 @@ sourceCompatibility = 1.8
 repositories {
     mavenCentral()
     maven {
-        url  "https://dl.bintray.com/kotlin/exposed"
+        url "https://dl.bintray.com/kotlin/exposed"
     }
 }
 
@@ -30,6 +30,7 @@ dependencies {
     compile 'io.github.cdimascio:java-dotenv:3.0.0'
     runtime "org.slf4j:slf4j-simple:1.7.25";
     runtime "mysql:mysql-connector-java:5.1.45"
+    runtime "com.h2database:h2:1.4.195"
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
