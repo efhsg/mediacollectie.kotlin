@@ -11,14 +11,14 @@ fun main(args: Array<String>) {
 }
 
 private fun printBestanden(zoekTerm: String?) {
-    val found: MutableList<Int> = mutableListOf()
+    var found: Int = 0
     queryBestanden(zoekTerm,
             {
                 println("${it[Bestanden.schijf]}:${it[Mappen.naam]}\\${it[Bestanden.naam]}.${it[Bestanden.bestandstype]}")
-                found.add(it[Bestanden.id])
+                found++
             }
     )
-    println("Records found: $found")
+    println("Records found: ${found}")
 }
 
 private fun printStreep() {
