@@ -3,9 +3,12 @@ package nl.differentcook.mediacollectie.query
 import nl.differentcook.mediacollectie.data.*
 
 fun main(args: Array<String>) {
-    printStreep()
-    printBestanden(if (args.size == 1) args[0] else null)
-    printStreep()
+    destroyDatabase()
+    makeDatabase()
+    seedDatabase()
+//    printStreep()
+//    printBestanden(if (args.size == 1) args[0] else null)
+//    printStreep()
 }
 
 private fun printBestanden(zoekTerm: String?) {

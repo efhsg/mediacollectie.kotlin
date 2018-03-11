@@ -31,7 +31,7 @@ fun makeDatabase() {
 fun destroyDatabase() {
     getDatabase()
     transaction {
-        drop(Schijven, Mappen, Bestandstypes, Bestanden, Ondertitels)
+        drop(Ondertitels, Bestanden, Bestandstypes, Mappen, Schijven)
     }
 }
 
@@ -51,12 +51,12 @@ private fun seedSchijven() {
     file.reader().forEachLine {
         val schijf = it.splitWithComma()
         Schijven.insert {
+            it[created_at] = DateTime.now()
+            it[updated_at] = DateTime.now()
             it[naam] = schijf[3].stripQuotes()
             it[capaciteit] = schijf[4].stripQuotes().toInt()
             it[beschikbaar] = schijf[5].stripQuotes().toInt()
             it[scandatum] = DateTime((SimpleDateFormat(dateFormat)).parse(schijf[6].stripQuotes()))
-            it[created_at] = DateTime.now()
-            it[updated_at] = DateTime.now()
         }
     }
 }

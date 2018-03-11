@@ -10,6 +10,7 @@ class QueryTests {
         @BeforeClass
         @JvmStatic
         fun setup() {
+            destroyDatabase()
             makeDatabase()
             seedDatabase()
         }
@@ -20,14 +21,14 @@ class QueryTests {
         val movieName = "Prospero's Books"
         val found = queryBestanden(movieName,
                 {
-                    assert(it[Bestanden.schijf].equals("2014"))
-                    assert(it[Mappen.naam].equals("\\Film\\Klassieker"))
+                    assert(it[Bestanden.schijf].equals("2016"))
+                    assert(it[Mappen.naam].equals("\\Film\\Klassieker\\"))
                     assert(it[Bestanden.naam].equals(movieName))
                     assert(it[Bestanden.bestandstype].equals("avi"))
                 }
         )
         assert(found.size == 1)
-        assert(found.contains(1877))
+        assert(found.contains(1))
     }
 
 

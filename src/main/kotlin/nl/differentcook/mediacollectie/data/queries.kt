@@ -11,7 +11,6 @@ fun queryBestanden(zoekNaam: String?, function: (ResultRow) -> Unit): MutableLis
     val join = Bestanden innerJoin Mappen
     val found: MutableList<Int> = mutableListOf()
     transaction {
-        logger.addLogger(StdOutSqlLogger)
         val query = if (zoekNaam != null)
             (join).select { Bestanden.naam like "%" + zoekNaam + "%" } else
             (join).selectAll()
