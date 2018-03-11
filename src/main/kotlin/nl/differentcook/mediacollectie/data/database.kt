@@ -21,6 +21,13 @@ fun getDatabase() {
             user = dotenv["DB_USER"] ?: "", password = dotenv["DB_PASSWORD"] ?: "")
 }
 
+fun createSeededDatabase() {
+    destroyDatabase()
+    makeDatabase()
+    seedDatabase()
+}
+
+
 fun makeDatabase() {
     getDatabase()
     transaction {

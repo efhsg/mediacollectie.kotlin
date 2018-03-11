@@ -1,6 +1,9 @@
 package nl.differentcook.mediacollectie.query
 
-import nl.differentcook.mediacollectie.data.*
+import nl.differentcook.mediacollectie.data.Bestanden
+import nl.differentcook.mediacollectie.data.Mappen
+import nl.differentcook.mediacollectie.data.createSeededDatabase
+import nl.differentcook.mediacollectie.data.queryBestanden
 import org.junit.BeforeClass
 import org.junit.Test
 
@@ -10,9 +13,7 @@ class QueryTests {
         @BeforeClass
         @JvmStatic
         fun setup() {
-            destroyDatabase()
-            makeDatabase()
-            seedDatabase()
+            createSeededDatabase()
         }
     }
 
