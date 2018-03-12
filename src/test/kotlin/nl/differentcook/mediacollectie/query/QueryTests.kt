@@ -1,5 +1,6 @@
 package nl.differentcook.mediacollectie.query
 
+import nl.differentcook.mediacollectie.data.Ondertitels
 import nl.differentcook.mediacollectie.data.createSeededDatabase
 import nl.differentcook.mediacollectie.data.queryBestanden
 import org.hamcrest.MatcherAssert.assertThat
@@ -54,6 +55,18 @@ class QueryTests {
                 }
         )
         assertThat(found, Is(mutableListOf(2, 3, 4)))
+    }
+
+    @Test
+    fun `query with subtitles`() {
+        val movieName = "Godfather"
+        val found: MutableList<List<String>> = mutableListOf()
+        queryBestanden(movieName,
+                {
+                    found.add(it.ondertitels)
+                }
+        )
+        assertThat(found, Is(mutableListOf(listOf(), listOf("nl", "en"), listOf("nl"))))
     }
 
 }

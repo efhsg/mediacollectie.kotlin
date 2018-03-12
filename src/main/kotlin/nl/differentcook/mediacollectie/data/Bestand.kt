@@ -9,6 +9,7 @@ data class Bestand(
         val naam: String,
         val bestandstype: String,
         val grootte: Int,
+        val ondertitels: List<String>,
         val created_at: DateTime,
         val updated_at: DateTime
 )
