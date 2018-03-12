@@ -13,6 +13,7 @@ fun queryBestanden(zoekNaam: String?, function: (Bestand) -> Unit) {
         val query = if (zoekNaam != null)
             (join).select { Bestanden.naam.lowerCase() like "%" + zoekNaam.toLowerCase() + "%" } else
             (join).selectAll()
+        query.orderBy(Bestanden.schijf).orderBy(Mappen.naam).orderBy(Bestanden.naam)
         query.forEach {
             function(Bestand(it[Bestanden.id], it[Bestanden.schijf], it[Mappen.naam],
                     it[Bestanden.naam], it[Bestanden.bestandstype], it[Bestanden.grootte], getOndertitels(it),
