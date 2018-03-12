@@ -1,7 +1,5 @@
 package nl.differentcook.mediacollectie.query
 
-import nl.differentcook.mediacollectie.data.Bestanden
-import nl.differentcook.mediacollectie.data.Mappen
 import nl.differentcook.mediacollectie.data.queryBestanden
 
 fun main(args: Array<String>) {
@@ -11,10 +9,10 @@ fun main(args: Array<String>) {
 }
 
 private fun printBestanden(zoekTerm: String?) {
-    var found: Int = 0
+    var found = 0
     queryBestanden(zoekTerm,
             {
-                println("${it[Bestanden.schijf]}:${it[Mappen.naam]}\\${it[Bestanden.naam]}.${it[Bestanden.bestandstype]}")
+                println("[${it.schijf}]:${it.map}\\${it.naam}.${it.bestandstype}")
                 found++
             }
     )

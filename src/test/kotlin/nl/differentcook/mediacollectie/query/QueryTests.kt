@@ -1,11 +1,11 @@
 package nl.differentcook.mediacollectie.query
 
-import nl.differentcook.mediacollectie.data.Bestanden
-import nl.differentcook.mediacollectie.data.Mappen
 import nl.differentcook.mediacollectie.data.createSeededDatabase
 import nl.differentcook.mediacollectie.data.queryBestanden
+import org.hamcrest.MatcherAssert.assertThat
 import org.junit.BeforeClass
 import org.junit.Test
+import org.hamcrest.CoreMatchers.`is` as Is
 
 class QueryTests {
 
@@ -23,15 +23,14 @@ class QueryTests {
         val found: MutableList<Int> = mutableListOf()
         queryBestanden(movieName,
                 {
-                    assert(it[Bestanden.schijf].equals("2016"))
-                    assert(it[Mappen.naam].equals("\\Film\\Klassieker"))
-                    assert(it[Bestanden.naam].equals(movieName))
-                    assert(it[Bestanden.bestandstype].equals("avi"))
-                    found.add(it[Bestanden.id])
+                    assert(it.schijf.equals("2016"))
+                    assert(it.map.equals("\\Film\\Klassieker"))
+                    assert(it.naam.equals(movieName))
+                    assert(it.bestandstype.equals("avi"))
+                    found.add(it.id)
                 }
         )
-        assert(found.size == 1)
-        assert(found.contains(1))
+        assertThat(found, Is(mutableListOf(1)))
     }
 
 
@@ -40,7 +39,7 @@ class QueryTests {
         val movieName = "n'existe pas"
         queryBestanden(movieName,
                 {
-                    assert(false)
+                    assertThat(false, Is(true))
                 }
         )
     }
@@ -51,13 +50,10 @@ class QueryTests {
         val found: MutableList<Int> = mutableListOf()
         queryBestanden(movieName,
                 {
-                    found.add(it[Bestanden.id])
+                    found.add(it.id)
                 }
         )
-        assert(found.size == 3)
-        assert(found.contains(2))
-        assert(found.contains(3))
-        assert(found.contains(4))
+        assertThat(found, Is(mutableListOf(2, 3, 4)))
     }
 
 }
