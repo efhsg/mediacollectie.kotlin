@@ -12,7 +12,8 @@ private fun printBestanden(zoekTerm: String?) {
     var found = 0
     queryBestanden(zoekTerm,
             {
-                println("[${it.schijf}]:${it.map}\\${it.naam}.${it.bestandstype}")
+                print("[${it.schijf}]:${it.map}\\${it.naam}.${it.bestandstype}")
+                if (!it.ondertitels.isEmpty()) println(", subs: ${it.ondertitels}") else println("")
                 found++
             }
     )
