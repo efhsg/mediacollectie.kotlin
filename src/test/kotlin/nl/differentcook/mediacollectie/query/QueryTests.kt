@@ -1,6 +1,5 @@
 package nl.differentcook.mediacollectie.query
 
-import nl.differentcook.mediacollectie.data.Ondertitels
 import nl.differentcook.mediacollectie.data.createSeededDatabase
 import nl.differentcook.mediacollectie.data.queryBestanden
 import org.hamcrest.MatcherAssert.assertThat
@@ -54,7 +53,7 @@ class QueryTests {
                     found.add(it.id)
                 }
         )
-        assertThat(found, Is(mutableListOf(2, 3, 4)))
+        assertThat(found, Is(mutableListOf(3, 2, 4)))
     }
 
     @Test
@@ -66,7 +65,7 @@ class QueryTests {
                     found.add(it.ondertitels)
                 }
         )
-        assertThat(found, Is(mutableListOf(listOf(), listOf("nl", "en"), listOf("nl"))))
+        assertThat(found, Is(mutableListOf(listOf("nl", "en"), listOf(), listOf("nl"))))
     }
 
 }
