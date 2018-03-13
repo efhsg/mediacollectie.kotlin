@@ -1,4 +1,4 @@
-package nl.differentcook.mediacollectie.query
+package nl.differentcook.mediacollectie.tests.query
 
 import nl.differentcook.mediacollectie.data.createSeededDatabase
 import nl.differentcook.mediacollectie.data.queryBestanden
