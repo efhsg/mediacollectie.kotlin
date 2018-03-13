@@ -9,15 +9,14 @@ fun main(args: Array<String>) {
 }
 
 private fun printBestanden(zoekTerm: String?) {
-    var found = 0
+    val found = mutableListOf<Int>()
     queryBestanden(zoekTerm,
             {
                 print("[${it.schijf}]:${it.map}\\${it.naam}.${it.bestandstype}")
                 if (!it.ondertitels.isEmpty()) println(", subs: ${it.ondertitels}") else println("")
-                found++
-            }
+                found.add(it.id)            }
     )
-    println("Records found: ${found}")
+    println("Records found: ${found.size}")
 }
 
 private fun printStreep() {

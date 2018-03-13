@@ -1,0 +1,24 @@
+package nl.differentcook.mediacollectie.tests.readdisk
+
+import nl.differentcook.mediacollectie.data.destroyDatabase
+import nl.differentcook.mediacollectie.data.makeDatabase
+import org.junit.BeforeClass
+import org.junit.Test
+import org.hamcrest.CoreMatchers.`is` as Is
+
+class ReaddiskTests {
+
+    companion object {
+        @BeforeClass
+        @JvmStatic
+        fun setup() {
+            destroyDatabase()
+            makeDatabase()
+        }
+    }
+
+    @Test
+    fun `open a filesystem`() {
+
+    }
+}
